@@ -3,7 +3,7 @@
 **Project:** Smart Solar Digital Experience Platform
 **Owner:** Fareed | QEERI
 **Deadline:** End of April / Mid-May 2026
-**Last Updated:** 2026-04-21
+**Last Updated:** 2026-04-19
 
 ---
 
@@ -84,14 +84,28 @@
 - [x] **3.3h** Economics Summary panel (system cost, annual savings, tariff, CO2 factor, payback progress bar)
 - [x] **3.3i** Topbar controls (building selector dropdown, time range tabs: Day/Month/Year)
 
-### 3.4 3D Build Visualizer
-- [ ] **3.4a** Canvas pane (70% width) with Three.js scene placeholder, grid overlay, horizon fade
-- [ ] **3.4b** Floating badges (WebGL status, camera hint pills)
-- [ ] **3.4c** Info panel (30% width) — Building selector cards (5 buildings with status pips)
-- [ ] **3.4d** Selected building stats grid (System Size, Today's Output, Efficiency, Status)
-- [ ] **3.4e** Energy Flow diagram (Solar -> Load -> Grid with animated flow dots)
-- [ ] **3.4f** Simulation Controls: System Size slider (100-1000 kWp), Tilt Angle selector (0/15/25/30), Recalculate button with loading state
-- [ ] **3.4g** Interactive building selection (click card -> update stats, flow values, subtitle)
+### 3.4 3D Visualizer — Qatar Digital Twin + WebXR AR
+**Scope revised 2026-04-19** per manager directive: full-bleed digital-twin scene covering Qatar with QF drill-down + WebXR AR. Replaces original 70/30 split design.
+
+- [x] **3.4a** Scene scaffold: full-bleed R3F canvas under topbar with camera, lighting, fog, dark-navy gradient + grid overlay + horizon fade
+- [x] **3.4b** QF campus geometry: 5 extruded buildings (B01–B05) with rooftop solar-panel overlays + ground plane
+- [x] **3.4c** Qatar context layer: low-poly peninsula outline + sea plane + pulsing Education City marker (visible at "Qatar" stop only)
+- [x] **3.4d** Camera rig with 3 stops (Qatar · Education City · Building) + animated lerp transitions (~900ms ease-in-out)
+- [x] **3.4e** HUD shell: 6 floating glass panels with corner-bracket accents (Qatar Summary, QF Gauge, Selected Building, Sim Controls, Energy Flow, Compass + coords)
+- [x] **3.4f** Zoom-level control / region picker (3 pills in top-center toolbar) — clicking updates camera stop + topbar subtitle
+- [x] **3.4g** Interactive building selection: clicking a building mesh highlights it (amber glow) + syncs Selected Building + Energy Flow panels
+- [x] **3.4h** Ambient 3D polish: pulsing amber glow on active building, rotating sun indicator, subtle particle flow on energy paths
+- [x] **3.4i** WebXR AR mode: `@react-three/xr` `ARButton` + hit-test placement of QF campus model at human scale; minimal floating chips during AR session
+- [x] **3.4j** AR fallback + compatibility chip: feature-detect `navigator.xr?.isSessionSupported('immersive-ar')`; show "AR requires Android Chrome + HTTPS" chip on unsupported devices
+
+**Post-completion revisions (2026-04-19)**
+
+| Change | Files affected | Reason |
+|---|---|---|
+| **AR/XR removed** | `Visualizer.jsx`, `SceneRoot.jsx`, deleted `ARMode.jsx` | Feature deemed unnecessary; removed Enter AR button, `isAR`/`arSupported` state, `XR` wrapper, `IfInSessionMode` guards, `@react-three/xr` wiring |
+| **Per-building camera focus** | `SceneRoot.jsx` → `CameraRig` | Fixed: camera now flies to an outward-vector position (campus-centre → building direction) scaled to footprint size, so no other building can occlude the selected one |
+| **Live compass heading** | `SceneRoot.jsx` → `HeadingTracker`, `Visualizer.jsx` → `CompassPanel` | Fixed: compass rose SVG group rotates by `-azimuthAngle` each frame via `CameraControls` ref; updates propagated from Canvas to HTML overlay without React state spam |
+| **Sun rays** | `AmbientFX.jsx` → `SunOrbit` | Added 5 thin amber planes (opacity 0.055, `depthWrite: false`) radiating from the sun at 72° intervals, tilted 38° downward; rotate slowly (0.05 rad/s) independent of corona rings |
 
 ### 3.5 Training Center
 - [ ] **3.5a** Module sidebar with progress tracking (7 modules)

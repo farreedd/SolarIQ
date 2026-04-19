@@ -5,7 +5,15 @@ import DemoBanner from './DemoBanner'
 const PAGE_META = {
   '/overview':    { title: 'Overview',      subtitle: 'QF Campus · All Systems' },
   '/analytics':   { title: 'Analytics',     subtitle: 'QF Campus · Energy Intelligence' },
-  '/visualizer':  { title: '3D Visualizer', subtitle: 'QF Campus · Building Models' },
+  '/visualizer':  {
+    title: '3D Visualizer',
+    subtitle: 'Qatar Digital Twin · Education City · Research Complex B01',
+    fullBleed: true,
+    chips: [
+      { label: 'WebGL Live',      color: 'var(--success)', bg: 'rgba(34,211,238,0.08)',  border: 'rgba(34,211,238,0.22)' },
+      { label: 'Simulation Mode', color: 'var(--accent)',  bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.22)' },
+    ],
+  },
   '/ai-insights': { title: 'AI Insights',   subtitle: 'Intelligence Hub · Beta' },
   '/forecasting': { title: 'Forecasting',   subtitle: 'QF Campus · 7-Day Outlook' },
 }
@@ -169,24 +177,40 @@ export default function SidebarLayout() {
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
             <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-muted)', fontVariantNumeric: 'tabular-nums' }}>{clock}</span>
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 6,
-              padding: '5px 12px',
-              background: 'rgba(34,211,238,0.08)',
-              border: '1px solid rgba(34,211,238,0.22)',
-              borderRadius: 20, fontSize: 12, fontWeight: 500, color: 'var(--success)',
-            }}>
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', animation: 'pulse-demo 2s ease-in-out infinite' }} />
-              All Systems Live
-            </div>
+            {meta.chips ? meta.chips.map(chip => (
+              <div key={chip.label} style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                padding: '5px 12px',
+                background: chip.bg,
+                border: `1px solid ${chip.border}`,
+                borderRadius: 20, fontSize: 12, fontWeight: 500, color: chip.color,
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: chip.color, animation: 'pulse-demo 2s ease-in-out infinite' }} />
+                {chip.label}
+              </div>
+            )) : (
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 6,
+                padding: '5px 12px',
+                background: 'rgba(34,211,238,0.08)',
+                border: '1px solid rgba(34,211,238,0.22)',
+                borderRadius: 20, fontSize: 12, fontWeight: 500, color: 'var(--success)',
+              }}>
+                <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--success)', animation: 'pulse-demo 2s ease-in-out infinite' }} />
+                All Systems Live
+              </div>
+            )}
           </div>
         </header>
 
         {/* Demo banner */}
         <DemoBanner />
 
-        {/* Scrollable content */}
-        <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '20px 24px 28px' }}>
+        {/* Page content — full-bleed for Visualizer, scrollable otherwise */}
+        <div style={meta.fullBleed
+          ? { flex: 1, overflow: 'hidden', padding: 0 }
+          : { flex: 1, overflowY: 'auto', overflowX: 'hidden', padding: '20px 24px 28px' }
+        }>
           <Outlet />
         </div>
       </main>
