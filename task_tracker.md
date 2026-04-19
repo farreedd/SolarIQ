@@ -56,22 +56,22 @@
 **Goal:** All 7 screens fully built in React with hardcoded data, matching wireframes exactly
 
 ### 3.1 Home / Landing Page
-- [ ] **3.1a** Top navigation bar (logo, nav links, CTA button, scroll behavior)
-- [ ] **3.1b** Hero section (headline with gradient text, subtitle, CTA buttons, trust badges)
-- [ ] **3.1c** Stats section (4 animated counter cards with count-up animation)
-- [ ] **3.1d** Features section (3 feature cards with icons, descriptions, links)
-- [ ] **3.1e** Footer strip (QEERI logo, version badge, status indicator)
-- [ ] **3.1f** Aurora blob background effects + noise overlay
-- [ ] **3.1g** Scroll-triggered reveal animations (IntersectionObserver)
+- [x] **3.1a** Top navigation bar (logo, nav links, CTA button, scroll behavior)
+- [x] **3.1b** Hero section (headline with gradient text, subtitle, CTA buttons, trust badges)
+- [x] **3.1c** Stats section (4 animated counter cards with count-up animation)
+- [x] **3.1d** Features section (3 feature cards with icons, descriptions, links)
+- [x] **3.1e** Footer strip (QEERI logo, version badge, status indicator)
+- [x] **3.1f** Aurora blob background effects + noise overlay
+- [x] **3.1g** Scroll-triggered reveal animations (IntersectionObserver)
 
 ### 3.2 Overview / Dashboard Home
-- [ ] **3.2a** KPI strip (4 cards: Total Campus Capacity, Today's Generation, Active Systems, CO2 Saved)
-- [ ] **3.2b** Campus Energy Map (5 building blocks with status indicators, SVG road lines, legend)
-- [ ] **3.2c** Live Energy Flow diagram (Solar -> Building -> Grid with animated dashes)
-- [ ] **3.2d** System Status panel (5 building rows with sparklines, efficiency, status badges)
-- [ ] **3.2e** Quick Actions panel (4 action cards: 3D Campus, Analytics, Simulation, Training)
-- [ ] **3.2f** Bottom strip: Recent Alerts, Platform Modules, Weather & Irradiance panels
-- [ ] **3.2g** Live clock + topbar status chips
+- [x] **3.2a** KPI strip (4 cards: Total Campus Capacity, Today's Generation, Active Systems, CO2 Saved)
+- [x] **3.2b** Campus Energy Map (5 building blocks with status indicators, SVG road lines, legend)
+- [x] **3.2c** Live Energy Flow diagram (Solar -> Building -> Grid with animated dashes)
+- [x] **3.2d** System Status panel (5 building rows with sparklines, efficiency, status badges)
+- [x] **3.2e** Quick Actions panel (4 action cards: 3D Campus, Analytics, Simulation, Training)
+- [x] **3.2f** Bottom strip: Recent Alerts, Platform Modules, Weather & Irradiance panels
+- [x] **3.2g** Live clock + topbar status chips
 
 ### 3.3 Analytics Dashboard
 - [ ] **3.3a** KPI row (7 cards: Energy Produced, Self-Consumption, Grid Export, Monthly Savings, CO2 Reduction, Payback Period, System Efficiency)
