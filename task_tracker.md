@@ -3,7 +3,7 @@
 **Project:** Smart Solar Digital Experience Platform
 **Owner:** Fareed | QEERI
 **Deadline:** End of April / Mid-May 2026
-**Last Updated:** 2026-04-20
+**Last Updated:** 2026-04-21
 
 ---
 
@@ -74,15 +74,15 @@
 - [x] **3.2g** Live clock + topbar status chips
 
 ### 3.3 Analytics Dashboard
-- [ ] **3.3a** KPI row (7 cards: Energy Produced, Self-Consumption, Grid Export, Monthly Savings, CO2 Reduction, Payback Period, System Efficiency)
-- [ ] **3.3b** Production vs Consumption area chart (Recharts, 30-day data)
-- [ ] **3.3c** Building Output Ranking list (5 buildings with live dots)
-- [ ] **3.3d** Hourly Generation bar chart (13 hourly bars, peak highlighted)
-- [ ] **3.3e** Energy Distribution donut chart (self-consumed, export, loss) with center label
-- [ ] **3.3f** AI Insights panel (3 insight cards: load shift, maintenance, forecast)
-- [ ] **3.3g** Monthly Production bar chart (12 months, current month highlighted)
-- [ ] **3.3h** Economics Summary panel (system cost, annual savings, tariff, CO2 factor, payback progress bar)
-- [ ] **3.3i** Topbar controls (building selector dropdown, time range tabs: Day/Month/Year)
+- [x] **3.3a** KPI row (7 cards: Energy Produced, Self-Consumption, Grid Export, Monthly Savings, CO2 Reduction, Payback Period, System Efficiency)
+- [x] **3.3b** Production vs Consumption area chart (Recharts, 30-day data)
+- [x] **3.3c** Building Output Ranking list (5 buildings with live dots)
+- [x] **3.3d** Hourly Generation bar chart (13 hourly bars, peak highlighted)
+- [x] **3.3e** Energy Distribution donut chart (self-consumed, export, loss) with center label
+- [x] **3.3f** AI Insights panel (3 insight cards: load shift, maintenance, forecast)
+- [x] **3.3g** Monthly Production bar chart (12 months, current month highlighted)
+- [x] **3.3h** Economics Summary panel (system cost, annual savings, tariff, CO2 factor, payback progress bar)
+- [x] **3.3i** Topbar controls (building selector dropdown, time range tabs: Day/Month/Year)
 
 ### 3.4 3D Build Visualizer
 - [ ] **3.4a** Canvas pane (70% width) with Three.js scene placeholder, grid overlay, horizon fade
