@@ -1,0 +1,205 @@
+# SolarIQ — Task Progress Tracker
+
+**Project:** Smart Solar Digital Experience Platform
+**Owner:** Fareed | QEERI
+**Deadline:** End of April / Mid-May 2026
+**Last Updated:** 2026-04-20
+
+---
+
+## Current Status Summary
+
+| Phase | Status | Notes |
+|---|---|---|
+| **Phase 1 — Wireframes & Design System** | **COMPLETE** | 7 HTML wireframes + `design-system.css` + `SolarIQ_Design_Guidelines.md` |
+| **Phase 2 — Project Setup** | **COMPLETE** | React + Vite, FastAPI, Tailwind, Router, Layouts, UI components, R3F scaffold |
+| Phase 3 — Frontend Screens | NOT STARTED | Convert wireframes to React components |
+| Phase 4 — Backend & Engine | NOT STARTED | FastAPI + simulation engine |
+| Phase 5 — Integration & Polish | NOT STARTED | Wire frontend to backend, demo mode |
+| Phase 6 — Deployment & Docs | NOT STARTED | Vercel + Railway deployment |
+
+---
+
+## Phase 1 — Wireframes & Design System [COMPLETE]
+
+**Goal:** Pixel-perfect visual ground truth and consolidated design guidelines before any React code is written.
+
+- [x] **1.1** 7 HTML wireframes (`Wireframe/html/Home.html`, `Overview.html`, `analytics.html`, `Visualizer.html`, `Training.html`, `AIInsights.html`, `Forecasting.html`)
+- [x] **1.2** Shared design system CSS (`Wireframe/html/design-system.css`) with tokens (colors, typography, glass morphism, status chips, scrollbar)
+- [x] **1.3** Dribbble inspiration research (`documentation/frontend examples/dribble.md`)
+- [x] **1.4** Collected frontend example screenshots (lich, lhly, lgrj) in `documentation/frontend examples/`
+- [x] **1.5** Design Guidelines consolidated doc (`SolarIQ_Design_Guidelines.md`) — authoritative visual reference for Phase 2+
+
+---
+
+## Phase 2 — Project Setup & Architecture
+**Target:** 1–2 days
+**Goal:** Working monorepo scaffold, both dev servers running, design system in place
+
+- [x] **2.1** Initialize React + Vite frontend (`/frontend`)
+- [x] **2.2** Initialize FastAPI backend (`/backend`)
+- [x] **2.3** Set up Tailwind CSS + design system (CSS variables, fonts, global styles from `design-system.css`)
+- [x] **2.4** Install all frontend dependencies (React Router v6, Framer Motion, Three.js/R3F, Recharts)
+- [x] **2.5** Scaffold React Router with 7 routes (Home, Overview, Analytics, Visualizer, Training, AIInsights, Forecasting)
+- [x] **2.6** Build reusable Layout components:
+  - [x] **2.6a** `TopNavLayout` — for Home & Training pages (top navbar, no sidebar)
+  - [x] **2.6b** `SidebarLayout` — for all dashboard pages (sidebar + topbar + content area)
+- [x] **2.7** Build Sidebar component with nav sections (Platform: Overview, Analytics, Visualizer, Training; Intelligence: AI Insights, Forecasting) + demo badge
+- [x] **2.8** Build shared UI components: `GlassCard`, `DemoBanner`, `Button`, `LoadingSkeleton`
+- [x] **2.9** Set up Three.js / R3F canvas scaffold (camera, lighting, orbit controls)
+- [x] **2.10** Git repo initialization + folder structure
+
+---
+
+## Phase 3 — Frontend Screens (Static Data)
+**Target:** 5–7 days
+**Goal:** All 7 screens fully built in React with hardcoded data, matching wireframes exactly
+
+### 3.1 Home / Landing Page
+- [ ] **3.1a** Top navigation bar (logo, nav links, CTA button, scroll behavior)
+- [ ] **3.1b** Hero section (headline with gradient text, subtitle, CTA buttons, trust badges)
+- [ ] **3.1c** Stats section (4 animated counter cards with count-up animation)
+- [ ] **3.1d** Features section (3 feature cards with icons, descriptions, links)
+- [ ] **3.1e** Footer strip (QEERI logo, version badge, status indicator)
+- [ ] **3.1f** Aurora blob background effects + noise overlay
+- [ ] **3.1g** Scroll-triggered reveal animations (IntersectionObserver)
+
+### 3.2 Overview / Dashboard Home
+- [ ] **3.2a** KPI strip (4 cards: Total Campus Capacity, Today's Generation, Active Systems, CO2 Saved)
+- [ ] **3.2b** Campus Energy Map (5 building blocks with status indicators, SVG road lines, legend)
+- [ ] **3.2c** Live Energy Flow diagram (Solar -> Building -> Grid with animated dashes)
+- [ ] **3.2d** System Status panel (5 building rows with sparklines, efficiency, status badges)
+- [ ] **3.2e** Quick Actions panel (4 action cards: 3D Campus, Analytics, Simulation, Training)
+- [ ] **3.2f** Bottom strip: Recent Alerts, Platform Modules, Weather & Irradiance panels
+- [ ] **3.2g** Live clock + topbar status chips
+
+### 3.3 Analytics Dashboard
+- [ ] **3.3a** KPI row (7 cards: Energy Produced, Self-Consumption, Grid Export, Monthly Savings, CO2 Reduction, Payback Period, System Efficiency)
+- [ ] **3.3b** Production vs Consumption area chart (Recharts, 30-day data)
+- [ ] **3.3c** Building Output Ranking list (5 buildings with live dots)
+- [ ] **3.3d** Hourly Generation bar chart (13 hourly bars, peak highlighted)
+- [ ] **3.3e** Energy Distribution donut chart (self-consumed, export, loss) with center label
+- [ ] **3.3f** AI Insights panel (3 insight cards: load shift, maintenance, forecast)
+- [ ] **3.3g** Monthly Production bar chart (12 months, current month highlighted)
+- [ ] **3.3h** Economics Summary panel (system cost, annual savings, tariff, CO2 factor, payback progress bar)
+- [ ] **3.3i** Topbar controls (building selector dropdown, time range tabs: Day/Month/Year)
+
+### 3.4 3D Build Visualizer
+- [ ] **3.4a** Canvas pane (70% width) with Three.js scene placeholder, grid overlay, horizon fade
+- [ ] **3.4b** Floating badges (WebGL status, camera hint pills)
+- [ ] **3.4c** Info panel (30% width) — Building selector cards (5 buildings with status pips)
+- [ ] **3.4d** Selected building stats grid (System Size, Today's Output, Efficiency, Status)
+- [ ] **3.4e** Energy Flow diagram (Solar -> Load -> Grid with animated flow dots)
+- [ ] **3.4f** Simulation Controls: System Size slider (100-1000 kWp), Tilt Angle selector (0/15/25/30), Recalculate button with loading state
+- [ ] **3.4g** Interactive building selection (click card -> update stats, flow values, subtitle)
+
+### 3.5 Training Center
+- [ ] **3.5a** Module sidebar with progress tracking (7 modules)
+- [ ] **3.5b** Module content area with step-by-step guided flow
+- [ ] **3.5c** Progress bar and completion state
+- [ ] **3.5d** Navigation between modules (previous/next)
+
+### 3.6 AI Insights Page
+- [ ] **3.6a** AI recommendations and insights panels
+- [ ] **3.6b** Intelligence hub layout with AI-specific styling (indigo `#6366f1` accent, exclusive to this page)
+- [ ] **3.6c** Beta badge and credible stub data
+
+### 3.7 Forecasting Page
+- [ ] **3.7a** Forecast charts (production + demand predictions)
+- [ ] **3.7b** Prediction panels and confidence indicators
+
+### 3.8 Cross-Cutting Frontend
+- [ ] **3.8a** Framer Motion page transition animations (all routes)
+- [ ] **3.8b** Mobile responsiveness pass (768px+ breakpoint)
+- [ ] **3.8c** Loading skeletons on all data-dependent components
+- [ ] **3.8d** Error states with fallback actions
+
+---
+
+## Phase 4 — Backend & Simulation Engine
+**Target:** 5–7 days
+**Goal:** FastAPI serving simulated data; frontend fully connected
+
+### 4.1 Simulation Engine
+- [ ] **4.1a** `synthetic_data.py` — Qatar TMY-based hourly solar irradiance + consumption profiles (8,760 rows)
+- [ ] **4.1b** `solar_engine.py` — DC/AC production, self-consumption, grid export, system efficiency
+- [ ] **4.1c** `economics.py` — QAR savings (0.18 QAR/kWh tariff), payback period, CO2 reduction (0.49 kg CO2/kWh)
+
+### 4.2 FastAPI Backend
+- [ ] **4.2a** `main.py` — FastAPI app with CORS, router registration
+- [ ] **4.2b** `/api/simulate` — simulation endpoint (building_id, capacity_kw params)
+- [ ] **4.2c** `/api/analytics/monthly` — monthly production + economics data
+- [ ] **4.2d** `/api/analytics/economics` — economics summary
+- [ ] **4.2e** `/api/training/modules` — training module content
+- [ ] **4.2f** `/api/forecast/next7days` — forecast stub endpoint
+- [ ] **4.2g** `/health` — health check endpoint
+
+### 4.3 Frontend API Integration
+- [ ] **4.3a** `solarApi.js` — single entry point for all API calls with demo-mode awareness
+- [ ] **4.3b** `useSolarData.js` hook — fetch state management, error handling, demo fallback
+- [ ] **4.3c** `useDemoMode.js` hook — DemoMode context provider + toggle logic
+- [ ] **4.3d** `demoData.js` — full fixture dataset matching all API response shapes
+- [ ] **4.3e** Replace all hardcoded data across 7 screens with live API calls
+
+---
+
+## Phase 5 — Integration, Polish & Demo Mode
+**Target:** 5–7 days
+**Goal:** Fully integrated, demo-ready, visually polished prototype
+
+### 5.1 3D Scene Enhancement
+- [ ] **5.1a** Campus building geometries (5 buildings with correct proportions)
+- [ ] **5.1b** Solar panel mesh overlays on rooftops
+- [ ] **5.1c** Animated energy flow particles (amber for solar, blue for consumption)
+- [ ] **5.1d** Building click interaction -> highlight + info panel sync
+
+### 5.2 Dashboard Interactivity
+- [ ] **5.2a** Building selector dropdown triggers data recalculation
+- [ ] **5.2b** Time range tabs (Day/Month/Year) trigger chart data switch
+- [ ] **5.2c** Simulation sliders (system size, tilt) trigger live API recalculation
+
+### 5.3 Demo Mode
+- [ ] **5.3a** DemoMode context wrapping entire app
+- [ ] **5.3b** NavBar/sidebar toggle switches all data sources
+- [ ] **5.3c** Amber demo banner display when active
+- [ ] **5.3d** All API calls intercepted and replaced with `demoData.js` fixtures
+
+### 5.4 UI Polish
+- [ ] **5.4a** All hover states, glow effects, and micro-interactions
+- [ ] **5.4b** Smooth page transitions between all 7 routes
+- [ ] **5.4c** Count-up animations on KPI numbers
+- [ ] **5.4d** Skeleton loading states on all panels
+
+### 5.5 Performance
+- [ ] **5.5a** Route-level code splitting (React.lazy + Suspense)
+- [ ] **5.5b** Lazy loading for Three.js scene
+- [ ] **5.5c** Image/asset optimization
+
+---
+
+## Phase 6 — Deployment & Documentation
+**Target:** 2–3 days
+**Goal:** Live public URL, complete docs, demo-ready visuals
+
+- [ ] **6.1** Deploy frontend to Vercel
+- [ ] **6.2** Deploy backend to Railway
+- [ ] **6.3** Environment variable configuration (`.env` for both environments)
+- [ ] **6.4** Technical documentation (`docs/technical_summary.md`)
+- [ ] **6.5** Root `README.md` with setup and deployment instructions
+- [ ] **6.6** Demo screenshots and screen recording
+
+---
+
+## Definition of Done
+
+- [ ] All 7 screens functional and connected to backend
+- [ ] Premium UI with glass morphism, glow effects, smooth animations matching wireframes
+- [ ] 3D scene with buildings, solar panels, animated energy flow
+- [ ] Analytics dashboard with 7 live KPIs and 4 chart types
+- [ ] Training module with guided steps and progress tracking
+- [ ] AI Insights and Forecasting pages functional (credible stubs)
+- [ ] Overview dashboard as command center with campus map, energy flow, weather
+- [ ] Demo Mode fully functional (no backend required)
+- [ ] Deployed to public URL
+- [ ] Technical documentation complete
+- [ ] Screenshots and demo visuals ready for presentations

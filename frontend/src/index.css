@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --bg: #050d1a;
+  --surface: #0d1f38;
+  --surface-2: #122845;
+  --border: #1e3a5f;
+  --primary: #0ea5e9;
+  --primary-glow: #0ea5e940;
+  --accent: #f59e0b;
+  --accent-glow: #f59e0b30;
+  --success: #22d3ee;
+  --text: #f0f9ff;
+  --text-muted: #7ea8c9;
+  --text-dim: #3d6488;
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  --shadow-glow-blue: 0 0 24px var(--primary-glow), 0 0 60px var(--primary-glow);
+  --shadow-glow-amber: 0 0 24px var(--accent-glow), 0 0 60px var(--accent-glow);
+}
+
+/* ─── Tailwind Theme Extension ──────────────────────────────── */
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-accent: var(--accent);
+  --color-success: var(--success);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+
+  --font-family-display: var(--font-display);
+  --font-family-body: var(--font-body);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── Base ──────────────────────────────────────────────────── */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border); }
+
+/* ─── Utility Classes ───────────────────────────────────────── */
+.glass-card {
+  background: rgba(13, 31, 56, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.kpi-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.status-badge.primary { background: rgba(14, 165, 233, 0.15); color: var(--primary); }
+.status-badge.accent  { background: rgba(245, 158, 11, 0.15);  color: var(--accent); }
+.status-badge.success { background: rgba(34, 211, 238, 0.15);  color: var(--success); }
