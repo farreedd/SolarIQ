@@ -114,9 +114,9 @@
 - [x] **3.5d** Navigation between modules (previous/next)
 
 ### 3.6 AI Insights Page
-- [ ] **3.6a** AI recommendations and insights panels
-- [ ] **3.6b** Intelligence hub layout with AI-specific styling (indigo `#6366f1` accent, exclusive to this page)
-- [ ] **3.6c** Beta badge and credible stub data
+- [x] **3.6a** AI recommendations and insights panels
+- [x] **3.6b** Intelligence hub layout with AI-specific styling (indigo `#6366f1` accent, exclusive to this page)
+- [x] **3.6c** Beta badge and credible stub data
 
 ### 3.7 Forecasting Page
 - [ ] **3.7a** Forecast charts (production + demand predictions)
