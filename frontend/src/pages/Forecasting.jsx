@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import {
   ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, AreaChart, Area, LineChart, ReferenceLine,
@@ -217,8 +218,6 @@ export default function Forecasting() {
             <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 11 }} axisLine={false} tickLine={false} width={48}
               tickFormatter={v => `${(v/1000).toFixed(1)}k`} />
             <Tooltip content={<ForecastTooltip />} />
-            <ReferenceLine x="Mon Apr 21" stroke="rgba(245,158,11,0.2)" strokeWidth={40} />
-            <ReferenceLine x="Tue Apr 22" stroke="rgba(245,158,11,0.2)" strokeWidth={40} />
             <Bar dataKey="production"  fill="rgba(14,165,233,0.55)"  stroke="#0ea5e9" strokeWidth={1} radius={[3,3,0,0]} maxBarSize={36} />
             <Bar dataKey="consumption" fill="rgba(245,158,11,0.55)" stroke="#f59e0b" strokeWidth={1} radius={[3,3,0,0]} maxBarSize={36} />
             <Line dataKey="netExport" stroke="#22d3ee" strokeWidth={2} strokeDasharray="5 4"

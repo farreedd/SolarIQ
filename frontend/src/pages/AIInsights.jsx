@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 // AI-exclusive indigo accent — do NOT use outside this page
 const AI        = '#6366f1'
