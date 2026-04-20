@@ -3,7 +3,7 @@
 **Project:** Smart Solar Digital Experience Platform
 **Owner:** Fareed | QEERI
 **Deadline:** End of April / Mid-May 2026
-**Last Updated:** 2026-04-19
+**Last Updated:** 2026-04-20
 
 ---
 
@@ -108,10 +108,10 @@
 | **Sun rays** | `AmbientFX.jsx` → `SunOrbit` | Added 5 thin amber planes (opacity 0.055, `depthWrite: false`) radiating from the sun at 72° intervals, tilted 38° downward; rotate slowly (0.05 rad/s) independent of corona rings |
 
 ### 3.5 Training Center
-- [ ] **3.5a** Module sidebar with progress tracking (7 modules)
-- [ ] **3.5b** Module content area with step-by-step guided flow
-- [ ] **3.5c** Progress bar and completion state
-- [ ] **3.5d** Navigation between modules (previous/next)
+- [x] **3.5a** Module sidebar with progress tracking (7 modules)
+- [x] **3.5b** Module content area with step-by-step guided flow
+- [x] **3.5c** Progress bar and completion state
+- [x] **3.5d** Navigation between modules (previous/next)
 
 ### 3.6 AI Insights Page
 - [ ] **3.6a** AI recommendations and insights panels
