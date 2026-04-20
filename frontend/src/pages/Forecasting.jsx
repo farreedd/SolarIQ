@@ -130,10 +130,23 @@ function KPICard({ label, value, sub, accent, badge }) {
 // ── Page ─────────────────────────────────────────────────────
 export default function Forecasting() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 20 }}
+    >
+      <style>{`
+        @media (max-width: 900px) {
+          .fc-kpi   { grid-template-columns: repeat(2,1fr) !important; }
+          .fc-mid   { grid-template-columns: 1fr !important; }
+          .fc-bot   { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
 
       {/* ── KPI Strip ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+      <div className="fc-kpi" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
         <KPICard
           label="7-Day Projected Yield"
           value={<>{TOTAL_7DAY.toLocaleString()} <span style={{ fontSize: 14, color: 'var(--text-muted)', fontWeight: 400 }}>kWh</span></>}
@@ -215,7 +228,7 @@ export default function Forecasting() {
       </Panel>
 
       {/* ── Middle row: Irradiance + Alerts ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 20 }}>
+      <div className="fc-mid" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: 20 }}>
 
         <Panel title="Irradiance Forecast" desc="Predicted GHI (W/m²) — optimal threshold at 850 W/m²">
           <ResponsiveContainer width="100%" height={220}>
@@ -254,7 +267,7 @@ export default function Forecasting() {
       </div>
 
       {/* ── Bottom row: Horizon + Accuracy + Buildings ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 20 }}>
+      <div className="fc-bot" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 20 }}>
 
         <Panel title="Monthly Forecast Horizon" desc="Projected yield May–Dec 2026">
           <ResponsiveContainer width="100%" height={180}>
@@ -330,7 +343,7 @@ export default function Forecasting() {
 
       </div>
 
-    </div>
+    </motion.div>
   )
 }
 

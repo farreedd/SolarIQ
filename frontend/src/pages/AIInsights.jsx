@@ -62,6 +62,38 @@ const INSIGHTS = [
     impact: 'Estimated savings: 576,000 QAR/year at current performance',
     impactIcon: 'dollar', action: 'View Full Report',
   },
+  {
+    id: 7, tab: 'forecasting',
+    title: '7-Day Demand Forecast', category: 'Forecasting', priority: 'Medium',
+    accent: '#6366f1', confidence: 85,
+    body: 'Campus consumption predicted at 14,200–15,800 kWh/day over the next 7 days. Tue and Wed show highest load from lab equipment cycles — ideal windows for shifting HVAC pre-cooling into solar peak hours.',
+    impact: '2 high-demand days identified — load shift could save ~1,400 QAR',
+    impactIcon: 'chart', action: 'View Demand Curve',
+  },
+  {
+    id: 8, tab: 'forecasting',
+    title: 'Dust Storm Advisory', category: 'Forecasting', priority: 'High',
+    accent: '#f59e0b', confidence: 81,
+    body: 'Regional sandstorm forecast for Apr 22 (24–36 hour window). Expected generation drop: 35–45% during event, with residual soiling cutting 8–10% for 3 days post-event until cleaning.',
+    impact: 'Stage cleaning crew Apr 23 — recover ~220 kWh/day faster',
+    impactIcon: 'alert', action: 'View Mitigation Plan',
+  },
+  {
+    id: 9, tab: 'forecasting',
+    title: 'Seasonal Production Shift', category: 'Forecasting', priority: 'Low',
+    accent: '#22d3ee', confidence: 93,
+    body: 'Qatar GHI model projects summer peak (Jun–Aug) at ~2,650 kWh/day average, with winter dip (Dec–Jan) to ~1,720 kWh/day. Annual production trajectory: 782 MWh campus-wide.',
+    impact: 'On track for 103% of first-year target',
+    impactIcon: 'chart', action: 'View Seasonal Model',
+  },
+  {
+    id: 10, tab: 'economics',
+    title: 'Tariff Optimization Opportunity', category: 'Economics', priority: 'Medium',
+    accent: '#4ade80', confidence: 87,
+    body: 'Current flat tariff: 0.18 QAR/kWh. Simulated time-of-use (ToU) tariff with 0.26 QAR/kWh peak rate would raise grid-export value during 11:00–15:00 solar peak, where 64% of export currently occurs.',
+    impact: 'Potential +9.4% annual savings — ~54,000 QAR/year',
+    impactIcon: 'dollar', action: 'Run Tariff Simulation',
+  },
 ]
 
 const PERF_STATS = [
@@ -183,7 +215,13 @@ export default function AIInsights() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, background: `radial-gradient(circle at top right, rgba(99,102,241,0.03), transparent 40%)` }}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 20, background: `radial-gradient(circle at top right, rgba(99,102,241,0.03), transparent 40%)` }}
+    >
 
       {/* ── Engine status row ── */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
@@ -311,6 +349,6 @@ export default function AIInsights() {
           50% { opacity: 0.35; transform: scale(0.7); }
         }
       `}</style>
-    </div>
+    </motion.div>
   )
 }

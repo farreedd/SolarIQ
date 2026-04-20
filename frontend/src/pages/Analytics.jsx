@@ -61,7 +61,12 @@ export default function Analytics() {
   }, [])
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    >
       <style>{`
         .kpi-card { transition: transform 0.18s ease, box-shadow 0.18s ease; }
         .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
@@ -739,6 +744,6 @@ export default function Analytics() {
         </motion.div>
 
       </div>
-    </>
+    </motion.div>
   )
 }

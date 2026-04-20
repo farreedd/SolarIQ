@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Outlet, NavLink, Link } from 'react-router-dom'
+import { Outlet, NavLink, Link, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 
 const navStyle = (scrolled) => ({
   position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
@@ -21,6 +22,7 @@ const ctaStyle = {
 }
 
 export default function TopNavLayout() {
+  const { pathname } = useLocation()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -59,7 +61,11 @@ export default function TopNavLayout() {
 
       {/* Push content below fixed nav */}
       <div style={{ paddingTop: 64 }}>
-        <Outlet />
+        <AnimatePresence mode="wait" initial={false}>
+          <div key={pathname}>
+            <Outlet />
+          </div>
+        </AnimatePresence>
       </div>
     </>
   )

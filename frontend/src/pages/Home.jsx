@@ -126,7 +126,12 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    >
       <style>{`
         @keyframes aurora-drift {
           0%   { opacity:0; transform:translate(0,0) scale(1); }
@@ -292,6 +297,6 @@ export default function Home() {
         </footer>
 
       </div>
-    </>
+    </motion.div>
   )
 }

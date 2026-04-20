@@ -1,5 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useSolarData } from '../hooks/useSolarData'
+import { useDemoMode } from '../hooks/useDemoMode'
+import ErrorCard from '../components/UI/ErrorCard'
+import LoadingSkeleton from '../components/UI/LoadingSkeleton'
 
 // ── 3.2a KPI Data ──────────────────────────────────────────────────────────
 const KPI_CARDS = [
@@ -129,6 +133,8 @@ function DashedConnector({ color = '#0ea5e9' }) {
 // ── Main Component ─────────────────────────────────────────────────────────
 export default function Overview() {
   const navigate = useNavigate()
+  const { loading, error, refetch } = useSolarData('/api/overview')
+  const { setDemoMode } = useDemoMode()
 
   const cardVariants = {
     hidden: { opacity: 0, y: 18 },
@@ -136,7 +142,12 @@ export default function Overview() {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+    >
       {/* Dash-flow keyframe */}
       <style>{`
         @keyframes dash-flow {
@@ -154,6 +165,34 @@ export default function Overview() {
         }
       `}</style>
 
+      {/* ── Error state (Phase 4 wires this up) ── */}
+      {error && (
+        <div style={{ padding: '40px 24px' }}>
+          <ErrorCard
+            title="Couldn't load Overview data"
+            message={error}
+            onRetry={refetch}
+            onDemoMode={() => setDemoMode(true)}
+          />
+        </div>
+      )}
+
+      {/* ── Loading skeleton (Phase 4 wires this up) ── */}
+      {loading && !error && (
+        <div style={{ padding: '0 2px 2.5rem', display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16 }}>
+            {[...Array(4)].map((_, i) => <LoadingSkeleton key={i} height={100} borderRadius={12} />)}
+          </div>
+          <LoadingSkeleton height={240} borderRadius={12} />
+          <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr', gap: 20 }}>
+            <LoadingSkeleton height={280} borderRadius={12} />
+            <LoadingSkeleton height={280} borderRadius={12} />
+          </div>
+        </div>
+      )}
+
+      {/* ── Main content (always shown in demo mode) ── */}
+      {!error && !loading && (
       <div style={{ padding: '0 2px 2.5rem', color: 'var(--text)' }}>
 
         {/* ── 3.2a KPI Strip ─────────────────────────────────────────────── */}
@@ -551,6 +590,7 @@ export default function Overview() {
           </div>
         </motion.div>
       </div>
-    </>
+      )} {/* end !error && !loading */}
+    </motion.div>
   )
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 
 const C = {
   amber: '#f59e0b', amberDim: 'rgba(245,158,11,0.10)', amberBorder: 'rgba(245,158,11,0.28)',
@@ -381,6 +382,12 @@ export default function Training() {
   }
 
   return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+    >
     <div style={{ display: 'flex', height: 'calc(100vh - 64px)', overflow: 'hidden' }}>
 
       {/* ── SIDEBAR ── */}
@@ -608,5 +615,6 @@ export default function Training() {
         }
       `}</style>
     </div>
+    </motion.div>
   )
 }
