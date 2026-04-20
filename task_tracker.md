@@ -3,7 +3,7 @@
 **Project:** Smart Solar Digital Experience Platform
 **Owner:** Fareed | QEERI
 **Deadline:** End of April / Mid-May 2026
-**Last Updated:** 2026-04-20
+**Last Updated:** 2026-04-21
 
 ---
 
@@ -119,8 +119,8 @@
 - [x] **3.6c** Beta badge and credible stub data
 
 ### 3.7 Forecasting Page
-- [ ] **3.7a** Forecast charts (production + demand predictions)
-- [ ] **3.7b** Prediction panels and confidence indicators
+- [x] **3.7a** Forecast charts (production + demand predictions)
+- [x] **3.7b** Prediction panels and confidence indicators
 
 ### 3.8 Cross-Cutting Frontend
 - [ ] **3.8a** Framer Motion page transition animations (all routes)
