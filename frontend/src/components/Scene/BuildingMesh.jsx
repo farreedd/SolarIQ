@@ -10,7 +10,7 @@ export default function BuildingMesh({ id, position, footprint, height, pvType, 
   const pvY     = height + 0.03
 
   const bodyEmissive  = isActive ? '#f59e0b' : hovered ? '#1e6fa8' : '#0ea5e9'
-  const bodyIntensity = isActive ? 0.45      : hovered ? 0.14      : 0.03
+  const bodyIntensity = isActive ? 0.32      : hovered ? 0.14      : 0.03
 
   return (
     <group
@@ -76,16 +76,12 @@ export default function BuildingMesh({ id, position, footprint, height, pvType, 
         </mesh>
       )}
 
-      {/* Amber point light above active building */}
-      {isActive && (
-        <pointLight
-          position={[position[0], height + 2.5, position[2]]}
-          color="#f59e0b"
-          intensity={1.8}
-          distance={8}
-          decay={2}
-        />
-      )}
+      {/*
+        Single-glow rule: the active building is marked by ONE amber cue — the
+        <Edges> outline above plus a modest body emissive. The previous decorative
+        amber pointLight was dropped to avoid glow-stacking (see DESIGN.md Amber
+        Scarcity Rule).
+      */}
     </group>
   )
 }

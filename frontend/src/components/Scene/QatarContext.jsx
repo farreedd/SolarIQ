@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Line, Billboard, Text } from '@react-three/drei'
+import { Line, Html } from '@react-three/drei'
 import * as THREE from 'three'
 import {
   QATAR_SHAPE_PTS,
@@ -11,20 +11,25 @@ import {
 // shape(x, y) is rotated by [-π/2, 0, 0] so it lies flat:
 //   world(x, 0, -y)
 
+// Labels are DOM (drei <Html>), not troika <Text>: troika's SDF glyph atlas
+// generation does a GPU ReadPixels that stalls some drivers hard enough to lose
+// the WebGL context (the Qatar white-screen). DOM labels avoid GL entirely.
 function LandmarkLabel({ text, position }) {
   return (
-    <Billboard position={position}>
-      <Text
-        fontSize={1.15}
-        color="#cfe4f7"
-        outlineColor="#050d1a"
-        outlineWidth={0.02}
-        anchorX="center"
-        anchorY="middle"
-      >
+    <Html
+      position={position}
+      center
+      zIndexRange={[4, 0]}
+      style={{ pointerEvents: 'none', userSelect: 'none' }}
+    >
+      <div style={{
+        fontFamily: 'var(--font-body)', fontSize: 10, fontWeight: 600,
+        letterSpacing: '0.02em', color: '#cfe4f7', whiteSpace: 'nowrap',
+        textShadow: '0 1px 5px rgba(5,13,26,0.95)',
+      }}>
         {text}
-      </Text>
-    </Billboard>
+      </div>
+    </Html>
   )
 }
 
@@ -169,7 +174,7 @@ function QatarLandmarks() {
   )
 }
 
-export default function QatarContext({ visible }) {
+export default function QatarContext({ visible, reducedMotion }) {
   const markerRef = useRef()
   const ringRef = useRef()
 
@@ -189,6 +194,7 @@ export default function QatarContext({ visible }) {
   }, [])
 
   useFrame(({ clock }) => {
+    if (reducedMotion) return  // hold the EC marker pulse static
     const t = clock.elapsedTime
     if (markerRef.current) {
       const s = 1 + 0.22 * Math.sin(t * 2.4)
@@ -271,19 +277,16 @@ export default function QatarContext({ visible }) {
           />
         </mesh>
 
-        {/* Education City label */}
-        <Billboard position={[0, 3.8, 0]}>
-          <Text
-            fontSize={1.3}
-            color="#fbbf24"
-            outlineColor="#050d1a"
-            outlineWidth={0.025}
-            anchorX="center"
-            anchorY="middle"
-          >
+        {/* Education City label (DOM, not troika Text) */}
+        <Html position={[0, 3.8, 0]} center zIndexRange={[4, 0]} style={{ pointerEvents: 'none', userSelect: 'none' }}>
+          <div style={{
+            fontFamily: 'var(--font-display)', fontSize: 13, fontWeight: 700,
+            color: '#fbbf24', whiteSpace: 'nowrap',
+            textShadow: '0 1px 6px rgba(5,13,26,0.98)',
+          }}>
             Education City · QF
-          </Text>
-        </Billboard>
+          </div>
+        </Html>
       </group>
     </group>
   )

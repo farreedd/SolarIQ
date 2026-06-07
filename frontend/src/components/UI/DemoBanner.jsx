@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Icon from './Icon'
 
 export default function DemoBanner() {
   const [dismissed, setDismissed] = useState(false)
@@ -20,7 +21,7 @@ export default function DemoBanner() {
         onClick={() => setDismissed(true)}
         style={{ marginLeft: 'auto', background: 'none', border: 'none', color: 'var(--accent)', opacity: 0.6, cursor: 'pointer', fontSize: 14, lineHeight: 1, padding: '0 2px', flexShrink: 0 }}
         aria-label="Dismiss banner"
-      >✕</button>
+      ><Icon name="x" size={12} /></button>
     </div>
   )
 }

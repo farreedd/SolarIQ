@@ -26,6 +26,8 @@ documentation/
 prompts/
 Wireframe/
 CLAUDE.md
+.impeccable/
+reviews/
 
 # ── Editor & OS ──────────────────────────────────────────────
 .vscode/

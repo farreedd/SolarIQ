@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { BUILDING_GEOMETRY } from '../../utils/visualizerData'
 
 // ── Sun Orbit ─────────────────────────────────────────────────────────────────
-function SunOrbit({ stop }) {
+function SunOrbit({ stop, reducedMotion }) {
   const groupRef  = useRef()
   const lightRef  = useRef()
   const corona1   = useRef()
@@ -17,6 +17,7 @@ function SunOrbit({ stop }) {
   const speed     = 0.12  // rad/s — full loop ~52 s
 
   useFrame(({ clock }) => {
+    if (reducedMotion) return  // freeze the sun + corona when motion is reduced
     const t   = clock.elapsedTime
     const ang = t * speed
     const x   = Math.cos(ang) * orbitR
@@ -35,10 +36,13 @@ function SunOrbit({ stop }) {
     if (raysRef.current)  raysRef.current.rotation.y  = t * 0.05
   })
 
+  // Static resting position for the sun when motion is reduced (NE, mid-elevation).
+  const restPos = [orbitR * 0.7, orbitY, orbitR * 0.7]
+
   return (
     <>
       {/* Sun sphere + corona */}
-      <group ref={groupRef}>
+      <group ref={groupRef} position={reducedMotion ? restPos : undefined}>
         {/* Core */}
         <mesh>
           <sphereGeometry args={[isQatar ? 3.5 : 0.7, 16, 16]} />
@@ -103,6 +107,7 @@ function SunOrbit({ stop }) {
       {/* Travelling point light */}
       <pointLight
         ref={lightRef}
+        position={reducedMotion ? restPos : undefined}
         color="#fff5cc"
         intensity={isQatar ? 1.2 : 2.0}
         distance={isQatar ? 200 : 40}
@@ -118,15 +123,12 @@ const CAMPUS_CENTER = new THREE.Vector3(0, 0.5, 0)
 const PARTICLES_PER_BUILDING = 5
 const PARTICLE_SPEED = 0.38  // units/s along path (0→1 in 1/speed seconds)
 
-function EnergyParticles({ stop }) {
-  if (stop === 'Qatar') return null
-
-  const entries = Object.entries(BUILDING_GEOMETRY)
-
-  // Pre-compute: one ref array per particle for position updates
+function EnergyParticles({ stop, reducedMotion }) {
+  // Hooks must run unconditionally; we branch on `stop` only in the render output.
   const meshRefs = useRef([])
 
   const particles = useMemo(() => {
+    const entries = Object.entries(BUILDING_GEOMETRY)
     const list = []
     entries.forEach(([, geo], bi) => {
       const origin = new THREE.Vector3(geo.position[0], geo.height * 0.6, geo.position[2])
@@ -138,11 +140,13 @@ function EnergyParticles({ stop }) {
       }
     })
     return list
-  }, [])  // eslint-disable-line react-hooks/exhaustive_deps
+  }, [])
 
   const tmp = useMemo(() => new THREE.Vector3(), [])
 
   useFrame(({ clock }) => {
+    // Gate the loop on reduced motion: leave particles at their static snapshot.
+    if (reducedMotion || stop === 'Qatar') return
     const t = clock.elapsedTime
     particles.forEach((p, i) => {
       const mesh = meshRefs.current[i]
@@ -160,31 +164,43 @@ function EnergyParticles({ stop }) {
     })
   })
 
+  if (stop === 'Qatar') return null
+
   return (
     <group>
-      {particles.map((_, i) => (
-        <mesh key={i} ref={el => (meshRefs.current[i] = el)}>
-          <sphereGeometry args={[0.07, 6, 6]} />
-          <meshStandardMaterial
-            color="#f59e0b"
-            emissive="#f59e0b"
-            emissiveIntensity={1.6}
-            transparent
-            opacity={0.85}
-            depthWrite={false}
-          />
-        </mesh>
-      ))}
+      {particles.map((p, i) => {
+        // Static snapshot midway along the path when motion is reduced.
+        const snap = reducedMotion
+          ? new THREE.Vector3().lerpVectors(p.origin, CAMPUS_CENTER, 0.5)
+          : null
+        return (
+          <mesh
+            key={i}
+            ref={el => (meshRefs.current[i] = el)}
+            position={snap ? [snap.x, snap.y, snap.z] : undefined}
+          >
+            <sphereGeometry args={[0.07, 6, 6]} />
+            <meshStandardMaterial
+              color="#f59e0b"
+              emissive="#f59e0b"
+              emissiveIntensity={1.6}
+              transparent
+              opacity={reducedMotion ? 0.5 : 0.85}
+              depthWrite={false}
+            />
+          </mesh>
+        )
+      })}
     </group>
   )
 }
 
 // ── Export ────────────────────────────────────────────────────────────────────
-export default function AmbientFX({ stop }) {
+export default function AmbientFX({ stop, reducedMotion }) {
   return (
     <>
-      <SunOrbit stop={stop} />
-      <EnergyParticles stop={stop} />
+      <SunOrbit stop={stop} reducedMotion={reducedMotion} />
+      <EnergyParticles stop={stop} reducedMotion={reducedMotion} />
     </>
   )
 }

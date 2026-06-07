@@ -3,6 +3,7 @@ import { Outlet, NavLink, Link, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import DemoBanner from './DemoBanner'
 import { useWindowSize } from '../../hooks/useWindowSize'
+import Icon from './Icon'
 
 const PAGE_META = {
   '/overview':    { title: 'Overview',      subtitle: 'QF Campus · All Systems' },
@@ -163,7 +164,7 @@ export default function SidebarLayout() {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: 17, flexShrink: 0,
             boxShadow: '0 4px 14px rgba(245,158,11,0.35)',
-          }}>☀️</div>
+          }}><Icon name="sun" size={18} color="#0b1a2f" /></div>
           <span style={{ fontFamily: 'var(--font-display)', fontSize: 19, fontWeight: 700, letterSpacing: '-0.025em', color: 'var(--text)', lineHeight: 1 }}>
             Solar<span style={{ color: 'var(--accent)' }}>IQ</span>
           </span>

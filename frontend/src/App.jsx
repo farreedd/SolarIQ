@@ -9,10 +9,12 @@ import Training    from './pages/Training'
 import AIInsights  from './pages/AIInsights'
 import Forecasting from './pages/Forecasting'
 import { DemoModeProvider } from './hooks/useDemoMode'
+import { MotionConfig } from 'framer-motion'
 
 export default function App() {
   return (
     <DemoModeProvider>
+    <MotionConfig reducedMotion="user">
     <BrowserRouter>
       <Routes>
         <Route element={<TopNavLayout />}>
@@ -28,6 +30,7 @@ export default function App() {
         </Route>
       </Routes>
     </BrowserRouter>
+    </MotionConfig>
     </DemoModeProvider>
   )
 }

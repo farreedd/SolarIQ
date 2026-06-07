@@ -1,3 +1,5 @@
+import Icon from './Icon'
+
 export default function ErrorCard({ title = 'Unable to load data', message, onRetry, onDemoMode }) {
   return (
     <div style={{
@@ -9,8 +11,8 @@ export default function ErrorCard({ title = 'Unable to load data', message, onRe
       <div style={{
         width: 44, height: 44, borderRadius: '50%',
         background: 'rgba(245,158,11,0.12)', border: '1px solid rgba(245,158,11,0.35)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
-      }}>⚠️</div>
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+      }}><Icon name="alert-triangle" size={22} color="var(--accent)" /></div>
 
       <div style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--text)' }}>
         {title}

@@ -39,14 +39,19 @@ export const QATAR_SHAPE_PTS = [
 export const EC_MARKER_POS = [20, 0, -12]
 
 // ── Qatar landmarks (world-space positions) ───────────────────────────────────
+// The Qatar stop views the peninsula from the +z (north) side, so a marker's
+// screen-vertical order is the reverse of its real north→south order. The labels
+// below are assigned in flipped order against the position slots so the map reads
+// correctly top→bottom (Lusail/north at top → Hamad airport/south at bottom). Only
+// the label text is flipped; every marker keeps its original position and geometry.
 export const QATAR_LANDMARKS = {
-  doha:    { label: 'Doha · West Bay',    type: 'cluster',  position: [28, 0,  20], count: 5, spread: 3.5, baseHeight: 5.5, heightVar: 3.5 },
-  lusail:  { label: 'Lusail',             type: 'cluster',  position: [23, 0,  50], count: 3, spread: 2.2, baseHeight: 5,   heightVar: 2.5 },
-  pearl:   { label: 'The Pearl',          type: 'cluster',  position: [34, 0,  28], count: 3, spread: 1.4, baseHeight: 2.5, heightVar: 1.5, ring: true },
-  aspire:  { label: 'Aspire Tower',       type: 'cylinder', position: [18, 0,   3], height: 10, radius: 0.7 },
+  doha:    { label: 'Aspire Tower',          type: 'cluster',  position: [28, 0,  20], count: 5, spread: 3.5, baseHeight: 5.5, heightVar: 3.5 },
+  lusail:  { label: 'Hamad International',    type: 'cluster',  position: [23, 0,  50], count: 3, spread: 2.2, baseHeight: 5,   heightVar: 2.5 },
+  pearl:   { label: 'QF · National Library', type: 'cluster',  position: [34, 0,  28], count: 3, spread: 1.4, baseHeight: 2.5, heightVar: 1.5, ring: true },
+  aspire:  { label: 'Doha · West Bay',       type: 'cylinder', position: [18, 0,   3], height: 10, radius: 0.7 },
   mia:     { label: 'Museum of Islamic Art', type: 'angled', position: [32, 0,  15], size: [2.4, 2.4, 2.4] },
-  qnl:     { label: 'QF · National Library', type: 'slab',  position: [22, 0, -10], size: [4, 1.3, 3] },
-  airport: { label: 'Hamad International',   type: 'strip', position: [28, 0, -25], size: [7, 0.6, 2.8] },
+  qnl:     { label: 'The Pearl',             type: 'slab',  position: [22, 0, -10], size: [4, 1.3, 3] },
+  airport: { label: 'Lusail',                type: 'strip', position: [28, 0, -25], size: [7, 0.6, 2.8] },
 }
 
 // ── Camera stops ──────────────────────────────────────────────────────────────

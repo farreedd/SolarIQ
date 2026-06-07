@@ -11,18 +11,50 @@
   --accent: #f59e0b;
   --accent-glow: #f59e0b30;
   --success: #22d3ee;
+  --positive: #4ade80;        /* green — "producing / active / up" status */
+  --positive-glow: #4ade8030;
+  --danger: #f87171;          /* red — high severity / negative / error (AA on dark surfaces) */
+  --danger-glow: #f8717130;
+  --warning: #f59e0b;         /* amber alias — medium severity (same hue as --accent) */
+  /* Semantic severity ramp: high=danger, medium=warning, low=text-muted */
   --text: #f0f9ff;
   --text-muted: #7ea8c9;
-  --text-dim: #3d6488;
+  --text-dim: #6b97bd;        /* WCAG AA: 6.3:1 on bg, 4.8:1 on surface-2 */
+  --text-dim-decorative: #3d6488; /* old dim — non-text decoration only */
+
+  /* Liquid-glass surface recipe (use via .glass-card / .liquid-glass) */
+  --glass-bg: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.012)), rgba(13, 31, 56, 0.5);
+  --glass-blur: blur(20px) saturate(180%);
+  --glass-border: 1px solid rgba(255,255,255,0.12);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.38), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 -1px 0 rgba(0,0,0,0.22);
 
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;  /* numbers / KPI values / chart figures */
 
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-xl: 28px;
   --radius-full: 999px;
+
+  /* Spacing scale (4px base) — adopt incrementally in place of magic numbers */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Type scale — body base is 16px to satisfy mobile readability */
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 28px;
+  --text-2xl: 40px;
 
   --shadow-glow-blue: 0 0 24px var(--primary-glow), 0 0 60px var(--primary-glow);
   --shadow-glow-amber: 0 0 24px var(--accent-glow), 0 0 60px var(--accent-glow);
@@ -37,12 +69,15 @@
   --color-primary: var(--primary);
   --color-accent: var(--accent);
   --color-success: var(--success);
+  --color-positive: var(--positive);
+  --color-danger: var(--danger);
   --color-text: var(--text);
   --color-text-muted: var(--text-muted);
   --color-text-dim: var(--text-dim);
 
   --font-family-display: var(--font-display);
   --font-family-body: var(--font-body);
+  --font-family-mono: var(--font-mono);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -72,19 +107,67 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--border); }
 
+/* ─── Accessibility: focus + reduced motion ─────────────────── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ─── Utility Classes ───────────────────────────────────────── */
-.glass-card {
-  background: rgba(13, 31, 56, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+/* Liquid glass: layered translucency, saturated backdrop, specular sheen */
+.glass-card,
+.liquid-glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+/* top specular highlight that gives the "liquid" sheen (above bg, below content) */
+.glass-card::before,
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0) 38%);
+  opacity: 0.7;
+}
+/* premium hover: subtle lift + brighter edge */
+.glass-card:hover,
+.liquid-glass:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.18);
+  box-shadow: 0 16px 44px rgba(0,0,0,0.46), inset 0 1px 0 rgba(255,255,255,0.18), inset 0 -1px 0 rgba(0,0,0,0.22);
 }
 
 .kpi-value {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Numeric data values: monospace + tabular figures so digits align in tables/KPIs */
+.mono-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
 }
 
 .status-badge {
@@ -100,3 +183,11 @@ body {
 .status-badge.primary { background: rgba(14, 165, 233, 0.15); color: var(--primary); }
 .status-badge.accent  { background: rgba(245, 158, 11, 0.15);  color: var(--accent); }
 .status-badge.success { background: rgba(34, 211, 238, 0.15);  color: var(--success); }
+
+/* ─── Global polish / micro-interactions ────────────────────── */
+button, [role="button"] { cursor: pointer; }
+button, a, [role="button"], input, select {
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+              box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+::selection { background: rgba(14, 165, 233, 0.32); color: var(--text); }

@@ -15,3 +15,4 @@ app.add_middleware(
 @app.get("/health")
 def health():
     return {"status": "ok", "platform": "SolarIQ", "version": "1.0.0"}
+

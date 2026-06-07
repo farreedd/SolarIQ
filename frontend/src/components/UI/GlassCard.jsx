@@ -1,16 +1,26 @@
-export default function GlassCard({ children, style, className, onClick }) {
+// Canonical glass surface. Uses the .liquid-glass recipe from index.css
+// (single source of truth) so visual tweaks happen in one place.
+export default function GlassCard({ children, style, className, onClick, ...rest }) {
+  const cls = ['liquid-glass', className].filter(Boolean).join(' ')
+  const interactive = typeof onClick === 'function'
   return (
     <div
-      className={className}
+      className={cls}
       onClick={onClick}
-      style={{
-        background: 'rgba(13,31,56,0.7)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        border: '1px solid var(--border)',
-        borderRadius: 'var(--radius-lg)',
-        ...style,
-      }}
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      onKeyDown={
+        interactive
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onClick(e)
+              }
+            }
+          : undefined
+      }
+      style={style}
+      {...rest}
     >
       {children}
     </div>
